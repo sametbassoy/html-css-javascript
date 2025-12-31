@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoBank | Future of Banking</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <!-- LOGIN SECTION -->
+    <section id="login-section">
+        <div class="login-card">
+            <div class="login-header">
+                <h1><span class="grad-text">Neo</span>Bank</h1>
+                <p>Welcome back! Please login to your account.</p>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="user" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="1234">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                <div class="error-msg" id="login-error"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard-section" class="hidden">
+        <nav class="app-container">
+            <div class="logo">
+                <ion-icon name="planet" class="grad-text"></ion-icon>
+                <span class="grad-text" style="font-size: 1.5rem; font-weight: 700;">NeoBank</span>
+            </div>
+            <div class="user-profile">
+                <span>Hello, <span id="user-name-display" style="font-weight: 600;">User</span></span>
+                <div class="avatar">U</div>
+                <button class="btn" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem;"
+                    id="logout-btn">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Dynamic Ticker -->
+        <div class="ticker-wrap">
+            <div class="ticker" id="currency-ticker">
+                <!-- Ticker items will be injected by JS -->
+                <div class="ticker-item">USD/TRY <span>34.20</span></div>
+                <div class="ticker-item">EUR/TRY <span>37.50</span></div>
+                <div class="ticker-item">BTC/USD <span>98,000</span></div>
+                <div class="ticker-item">ETH/USD <span>3,200</span></div>
+                <div class="ticker-item">USD/EUR <span>0.92</span></div>
+            </div>
+        </div>
+
+        <div class="app-container grid">
+            <!-- Left Column: Main Stats -->
+            <div class="main-content">
+                <div class="card balance-card">
+                    <div class="balance-title">Total Balance</div>
+                    <div class="balance-amount">$<span id="balance-display">12,450.00</span></div>
+                    <div class="balance-title" style="font-size: 0.8rem; opacity: 0.7;">**** **** **** 4589</div>
+
+                    <div class="card-actions">
+                        <button class="action-btn"><ion-icon name="arrow-up-outline"></ion-icon> Send</button>
+                        <button class="action-btn"><ion-icon name="arrow-down-outline"></ion-icon> Request</button>
+                        <button class="action-btn"><ion-icon name="swap-horizontal-outline"></ion-icon> Swap</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="transactions-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">View
+                            All</a>
+                    </div>
+                    <ul class="transaction-list" id="transaction-list">
+                        <!-- JS will populate this -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Quick Actions & Cards -->
+            <div class="sidebar">
+                <div class="card">
+                    <div class="transactions-header">
+                        <h3>Quick Transfer</h3>
+                    </div>
+                    <div class="quick-transfer">
+                        <div class="user-avatars">
+                            <img src="https://i.pravatar.cc/100?img=1" class="user-avatar-img" alt="User 1">
+                            <img src="https://i.pravatar.cc/100?img=5" class="user-avatar-img" alt="User 2">
+                            <img src="https://i.pravatar.cc/100?img=8" class="user-avatar-img" alt="User 3">
+                            <img src="https://i.pravatar.cc/100?img=12" class="user-avatar-img" alt="User 4">
+                            <div class="user-avatar-img"
+                                style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.1); border:none;">
+                                <ion-icon name="add"></ion-icon>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" placeholder="Amount ($)">
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">Transfer Now</button>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, #059669, #10b981);">
+                    <div class="transactions-header" style="margin-bottom: 0.5rem; color: white;">
+                        <h3>Cashback</h3>
+                        <ion-icon name="gift-outline" style="font-size: 1.5rem;"></ion-icon>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin-bottom: 1rem;">
+                        You've earned $45.20 in cashback this month!
+                    </p>
+                    <button class="btn" style="background: white; color: #059669; width: 100%;">Claim</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
