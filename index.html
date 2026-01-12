@@ -24,11 +24,11 @@
             <form id="login-form">
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="user" autocomplete="off">
+                    <input type="text" id="username" autocomplete="off">
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="1234">
+                    <input type="password" id="password">
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
                 <div class="error-msg" id="login-error"></div>
@@ -43,9 +43,15 @@
                 <ion-icon name="planet" class="grad-text"></ion-icon>
                 <span class="grad-text" style="font-size: 1.5rem; font-weight: 700;">NeoBank</span>
             </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-nav="home">Home</a>
+                <a href="#transactions" class="nav-link" data-nav="transactions">Transactions</a>
+                <a href="#transfer" class="nav-link" data-nav="transfer">Transfer</a>
+                <a href="#settings" class="nav-link" data-nav="settings">Settings</a>
+            </div>
             <div class="user-profile">
                 <span>Hello, <span id="user-name-display" style="font-weight: 600;">User</span></span>
-                <div class="avatar">U</div>
+                <div class="avatar" id="user-avatar">U</div>
                 <button class="btn" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem;"
                     id="logout-btn">
                     <ion-icon name="log-out-outline"></ion-icon>
@@ -57,74 +63,153 @@
         <div class="ticker-wrap">
             <div class="ticker" id="currency-ticker">
                 <!-- Ticker items will be injected by JS -->
-                <div class="ticker-item">USD/TRY <span>34.20</span></div>
-                <div class="ticker-item">EUR/TRY <span>37.50</span></div>
+                <div class="ticker-item">USD/TRY <span>43.13</span></div>
+                <div class="ticker-item">EUR/TRY <span>50.46</span></div>
                 <div class="ticker-item">BTC/USD <span>98,000</span></div>
                 <div class="ticker-item">ETH/USD <span>3,200</span></div>
                 <div class="ticker-item">USD/EUR <span>0.92</span></div>
             </div>
         </div>
 
-        <div class="app-container grid">
-            <!-- Left Column: Main Stats -->
-            <div class="main-content">
-                <div class="card balance-card">
-                    <div class="balance-title">Total Balance</div>
-                    <div class="balance-amount">$<span id="balance-display">12,450.00</span></div>
-                    <div class="balance-title" style="font-size: 0.8rem; opacity: 0.7;">**** **** **** 4589</div>
+        <div class="app-container">
+            <div class="page" data-page="home">
+                <div class="grid">
+                    <div class="main-content">
+                        <div class="card balance-card">
+                            <div class="balance-title">Total Balance</div>
+                            <div class="balance-amount">$<span id="balance-display">12,450.00</span></div>
+                            <div class="balance-title" style="font-size: 0.8rem; opacity: 0.7;">**** **** **** 4589</div>
 
-                    <div class="card-actions">
-                        <button class="action-btn"><ion-icon name="arrow-up-outline"></ion-icon> Send</button>
-                        <button class="action-btn"><ion-icon name="arrow-down-outline"></ion-icon> Request</button>
-                        <button class="action-btn"><ion-icon name="swap-horizontal-outline"></ion-icon> Swap</button>
-                    </div>
-                </div>
+                            <div class="card-actions">
+                                <button class="action-btn"><ion-icon name="arrow-up-outline"></ion-icon> Send</button>
+                                <button class="action-btn"><ion-icon name="arrow-down-outline"></ion-icon> Request</button>
+                                <button class="action-btn"><ion-icon name="swap-horizontal-outline"></ion-icon> Swap</button>
+                            </div>
+                        </div>
 
-                <div class="card">
-                    <div class="transactions-header">
-                        <h3>Recent Transactions</h3>
-                        <a href="#" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">View
-                            All</a>
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Recent Transactions</h3>
+                                <a href="#transactions" class="inline-link" data-nav="transactions" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">View
+                                    All</a>
+                            </div>
+                            <ul class="transaction-list" id="transaction-list">
+                            </ul>
+                        </div>
                     </div>
-                    <ul class="transaction-list" id="transaction-list">
-                        <!-- JS will populate this -->
-                    </ul>
+
+                    <div class="sidebar">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Quick Transfer</h3>
+                            </div>
+                            <div class="quick-transfer">
+                                <div class="user-avatars">
+                                    <img src="https://i.pravatar.cc/100?img=1" class="user-avatar-img" alt="User 1">
+                                    <img src="https://i.pravatar.cc/100?img=5" class="user-avatar-img" alt="User 2">
+                                    <img src="https://i.pravatar.cc/100?img=8" class="user-avatar-img" alt="User 3">
+                                    <img src="https://i.pravatar.cc/100?img=12" class="user-avatar-img" alt="User 4">
+                                    <div class="user-avatar-img"
+                                        style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.1); border:none;">
+                                        <ion-icon name="add"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" id="quick-transfer-amount" placeholder="Amount ($)">
+                                </div>
+                                <button class="btn btn-primary" id="quick-transfer-btn" style="width: 100%;">Transfer Now</button>
+                                <div class="error-msg" id="quick-transfer-msg"></div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="background: linear-gradient(135deg, #059669, #10b981);">
+                            <div class="transactions-header" style="margin-bottom: 0.5rem; color: white;">
+                                <h3>Cashback</h3>
+                                <ion-icon name="gift-outline" style="font-size: 1.5rem;"></ion-icon>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin-bottom: 1rem;">
+                                You've earned $45.20 in cashback this month!
+                            </p>
+                            <button class="btn" style="background: white; color: #059669; width: 100%;">Claim</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Right Column: Quick Actions & Cards -->
-            <div class="sidebar">
-                <div class="card">
-                    <div class="transactions-header">
-                        <h3>Quick Transfer</h3>
-                    </div>
-                    <div class="quick-transfer">
-                        <div class="user-avatars">
-                            <img src="https://i.pravatar.cc/100?img=1" class="user-avatar-img" alt="User 1">
-                            <img src="https://i.pravatar.cc/100?img=5" class="user-avatar-img" alt="User 2">
-                            <img src="https://i.pravatar.cc/100?img=8" class="user-avatar-img" alt="User 3">
-                            <img src="https://i.pravatar.cc/100?img=12" class="user-avatar-img" alt="User 4">
-                            <div class="user-avatar-img"
-                                style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.1); border:none;">
-                                <ion-icon name="add"></ion-icon>
+            <div class="page hidden" data-page="transactions">
+                <div class="grid">
+                    <div class="main-content">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>All Transactions</h3>
+                                <a href="#home" class="inline-link" data-nav="home" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Back</a>
                             </div>
+                            <ul class="transaction-list" id="transaction-list-all"></ul>
                         </div>
-                        <div class="input-group">
-                            <input type="number" placeholder="Amount ($)">
+                    </div>
+                    <div class="sidebar">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Summary</h3>
+                            </div>
+                            <div class="balance-title">This is a demo list.</div>
                         </div>
-                        <button class="btn btn-primary" style="width: 100%;">Transfer Now</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="card" style="background: linear-gradient(135deg, #059669, #10b981);">
-                    <div class="transactions-header" style="margin-bottom: 0.5rem; color: white;">
-                        <h3>Cashback</h3>
-                        <ion-icon name="gift-outline" style="font-size: 1.5rem;"></ion-icon>
+            <div class="page hidden" data-page="transfer">
+                <div class="grid">
+                    <div class="main-content">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Transfer</h3>
+                            </div>
+                            <div class="quick-transfer">
+                                <div class="input-group">
+                                    <label for="transfer-to">To</label>
+                                    <input type="text" id="transfer-to" placeholder="Jane Doe" autocomplete="off">
+                                </div>
+                                <div class="input-group">
+                                    <label for="transfer-amount">Amount ($)</label>
+                                    <input type="number" id="transfer-amount" placeholder="100" min="1">
+                                </div>
+                                <button class="btn btn-primary" id="transfer-btn" style="width: 100%;">Send Transfer</button>
+                                <div class="error-msg" id="transfer-msg"></div>
+                            </div>
+                        </div>
                     </div>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin-bottom: 1rem;">
-                        You've earned $45.20 in cashback this month!
-                    </p>
-                    <button class="btn" style="background: white; color: #059669; width: 100%;">Claim</button>
+                    <div class="sidebar">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Tip</h3>
+                            </div>
+                            <div class="balance-title">Transfers are simulated for this project.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page hidden" data-page="settings">
+                <div class="grid">
+                    <div class="main-content">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>Settings</h3>
+                            </div>
+                            <div class="balance-title">Logged in as</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0 1.5rem;" id="settings-username">User</div>
+                            <button class="btn" id="clear-data-btn" style="background: rgba(255,255,255,0.1); color: white; width: 100%;">Clear Saved Session</button>
+                        </div>
+                    </div>
+                    <div class="sidebar">
+                        <div class="card">
+                            <div class="transactions-header">
+                                <h3>About</h3>
+                            </div>
+                            <div class="balance-title">NeoBank UI demo</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
